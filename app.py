@@ -16,10 +16,11 @@ import tempfile
 import uuid
 import time
 from IPython.display import Markdown, display
-from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, Settings
-from llama_index.llms.ollama import Ollama
-from llama_index.vector_stores.qdrant import QdrantVectorStore
-from llama_index.embeddings.openai import OpenAIEmbedding
+# Zmodyfikowane importy zgodne z nową strukturą
+from llama_index import VectorStoreIndex, SimpleDirectoryReader, StorageContext, Settings
+from llama_index.llms import Ollama
+from llama_index.vector_stores import QdrantVectorStore
+from llama_index.embeddings import TextEmbedding
 from workflow import CorrectiveRAGWorkflow
 import io
 from contextlib import redirect_stdout
@@ -76,7 +77,8 @@ def initialize_workflow(file_path):
         )
         
         vector_store = QdrantVectorStore(client=client, collection_name="test")
-        embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+        # Używamy TextEmbedding zamiast HuggingFaceEmbedding
+        embed_model = TextEmbedding(model_name="BAAI/bge-large-en-v1.5")
         Settings.embed_model = embed_model
         storage_context = StorageContext.from_defaults(vector_store=vector_store)
         index = VectorStoreIndex.from_documents(
@@ -230,4 +232,4 @@ if prompt := st.chat_input("Ask a question about your documents..."):
             st.markdown(full_response)
 
     # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+    st.session_state.messages.append({"role": "assistant", "content": full_response}) 

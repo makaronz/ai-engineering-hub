@@ -1,0 +1,12 @@
+streamlit>=1.30.0
+nest-asyncio>=1.5.8
+python-dotenv>=1.0.0
+qdrant-client>=1.6.0
+llama-index>=0.8.0
+llama-index-llms-ollama>=0.1.0
+torch>=2.0.0
+transformers>=4.30.0
+sentence-transformers>=2.2.2
+fastapi>=0.100.0
+uvicorn>=0.23.2
+python-multipart>=0.0.6

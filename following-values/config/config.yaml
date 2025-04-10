@@ -1,0 +1,30 @@
+# Application settings
+app:
+  name: "Following Values"
+  version: "0.1.0"
+  debug: true
+  host: "0.0.0.0"
+  port: 8000
+
+# Database settings
+database:
+  url: "sqlite:///./following_values.db"
+  echo: false
+
+# Security settings
+security:
+  secret_key: "your-secret-key-here"
+  algorithm: "HS256"
+  access_token_expire_minutes: 30
+
+# Feature flags
+features:
+  analytics_enabled: true
+  notifications_enabled: true
+  data_export_enabled: true
+
+# Logging configuration
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "app.log" 
